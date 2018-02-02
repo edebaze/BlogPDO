@@ -1,12 +1,32 @@
 <?php
-    namespace App\Table;
+    
+        namespace App\Table;
+        
+        use App\App;
+        
+    class Article extends Table {
+        
+        public static function getLast() {
+            $statement = "
+                            SELECT t_articles.idT_ARTICLES, t_articles.titre, t_articles.contenu, t_categories_has_t_articles.T_CATEGORIES_idT_CATEGORIES as categorieId
+                            FROM t_articles
+                            LEFT JOIN t_categories_has_t_articles
+                                ON t_categories_has_t_articles.T_ARTICLES_idT_ARTICLES = t_articles.idT_ARTICLES
+                        ";
+            
+            return App::getDb()->query($statement, __CLASS__);
+        }
 
-    class Article {
-
-        public function __get($key) {
-            $method = 'get' . ucfirst($key);
-            $this->$key = $this->$method();
-            return $this->$key;
+        public static function lastByCategory($catId) {
+            $statement = "
+                            SELECT *
+                            FROM t_categories_has_t_articles
+                            INNER JOIN t_articles
+                                ON t_categories_has_t_articles.T_ARTICLES_idT_ARTICLES = t_articles.idT_ARTICLES
+                            WHERE t_categories_has_t_articles.T_CATEGORIES_idT_CATEGORIES = ". $catId ."
+                        ";
+    
+            return App::getDb()->query($statement, __CLASS__);
         }
 
         public function getURL() {
