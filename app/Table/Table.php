@@ -17,13 +17,26 @@
         }
         
         public static function find($id) {
+            $table = 'idT_' . strtoupper(get_called_class()) . 'S';
+            $table = str_replace('APP\TABLE\\', '', $table);
             $statement = "
                             SELECT *
                             FROM  " . static::getTable() . "
-                            WHERE idT_CATEGORIES = ?
+                            WHERE ".$table." = ?
                         ";
     
             return App::getDb()->prepare($statement, [$id], get_called_class(), true);
+        }
+        
+        public static function query($statement, $attributes = null, $one = false) {
+            
+            if($attributes) {
+                return App::getDb()->prepare($statement, $attributes, get_called_class(), $one);
+            } else {
+                return App::getDb()->query($statement, get_called_class(), $one);
+            }
+            
+          
         }
     
         public function __get($key) {

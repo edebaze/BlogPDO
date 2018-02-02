@@ -14,7 +14,7 @@
                                 ON t_categories_has_t_articles.T_ARTICLES_idT_ARTICLES = t_articles.idT_ARTICLES
                         ";
             
-            return App::getDb()->query($statement, __CLASS__);
+            return self::query($statement);
         }
 
         public static function lastByCategory($catId) {
@@ -23,10 +23,10 @@
                             FROM t_categories_has_t_articles
                             INNER JOIN t_articles
                                 ON t_categories_has_t_articles.T_ARTICLES_idT_ARTICLES = t_articles.idT_ARTICLES
-                            WHERE t_categories_has_t_articles.T_CATEGORIES_idT_CATEGORIES = ". $catId ."
+                            WHERE t_categories_has_t_articles.T_CATEGORIES_idT_CATEGORIES = ?
                         ";
     
-            return App::getDb()->query($statement, __CLASS__);
+            return self::query($statement, [$catId]);
         }
 
         public function getURL() {
