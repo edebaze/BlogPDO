@@ -6,6 +6,8 @@
         
     class Article extends Table {
         
+        protected static $table = 't_articles';
+        
         public static function getLast() {
             $statement = "
                             SELECT t_articles.idT_ARTICLES, t_articles.titre, t_articles.contenu, t_categories_has_t_articles.T_CATEGORIES_idT_CATEGORIES as categorieId

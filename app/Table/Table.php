@@ -5,23 +5,12 @@
     
     class Table {
         
-        protected static $table;
-        
-        private static function getTable() {
-            if(static::$table == null) {
-                $class_name = explode('\\', get_called_class());
-                static::$table = 't_' . strtolower(end($class_name)) . 's';
-            }
-    
-            return static::$table;
-        }
-        
         public static function find($id) {
             $table = 'idT_' . strtoupper(get_called_class()) . 'S';
             $table = str_replace('APP\TABLE\\', '', $table);
             $statement = "
                             SELECT *
-                            FROM  " . static::getTable() . "
+                            FROM  " . static::$table . "
                             WHERE ".$table." = ?
                         ";
     
@@ -48,7 +37,7 @@
         public static function all() {
             $statement = "
                             SELECT *
-                            FROM  " . static::getTable() . "
+                            FROM  " . static::$table . "
                         ";
         
             return App::getDb()->query($statement, get_called_class());

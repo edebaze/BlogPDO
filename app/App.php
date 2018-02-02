@@ -10,6 +10,8 @@ namespace App;
         const DB_HOST = 'localhost';
 
         private static $database;
+        
+        private static $title = 'Grafikart Blog';
 
         public static function getDb() {
             if(self::$database === null) {
@@ -21,5 +23,13 @@ namespace App;
         public static function notfound() {
             header("HTTP/1.0 404 Not Found");
             header('Location : index.php?p=404');
+        }
+        
+        public static function getTitle() {
+            return self::$title;
+        }
+    
+        public static function setTitle() {
+            self::$title .= ' | ' . $title;
         }
     }
