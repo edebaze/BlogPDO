@@ -1,5 +1,5 @@
 <?php
-    namespace App\Table;
+    namespace Core\Table;
     
     use Core\Database\Database;
     
@@ -22,11 +22,6 @@
                 return $this->db->query('SELECT * FROM t_articles');
             }
     
-            public function query($statement, $attributes=null, $one=false) {
-                if($attributes) {
-                    $this->db->prepare($statement, $attributes, )
-                }
-            }
     }
     
     

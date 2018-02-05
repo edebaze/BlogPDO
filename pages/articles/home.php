@@ -4,7 +4,7 @@
     
         <div class="col-xs-8">
         
-            <?php foreach(\App\Table\Article::getLast() as $post): ?>
+            <?php foreach(App::getInstance()->getTable('ArticlesTables')->last() as $post): ?>
             
                 <h2><a href="<?= $post->url; ?>"><?= $post->titre; ?></a></h2>
             

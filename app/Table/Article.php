@@ -2,11 +2,10 @@
     
         namespace App\Table;
         
-        use App\App;
         
     class Article extends Table {
         
-        protected static $table = 't_articles';
+        protected $table = 't_articles';
         
         public static function getLast() {
             $statement = "

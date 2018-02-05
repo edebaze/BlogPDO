@@ -1,5 +1,5 @@
 <?php
-    namespace App;
+    namespace Core;
     /**
      * Class Autoloader
      * @package Tutoriel
@@ -23,12 +23,10 @@
             if (__NAMESPACE__ == $arrayClass[0]) {
                 if (strpos($class, __NAMESPACE__ . '\\') === 0) {
                     $class = str_replace(__NAMESPACE__ . '\\', '', $class);
-                    //$class = ROOT . '/app/' . $class;
                     $class = str_replace('\\', '/', $class);
-                    $class .= '.php';
                 }
-        
-                require_once $class;
+    
+                require_once $class . '.php';
             }
         }
 

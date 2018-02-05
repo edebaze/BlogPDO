@@ -1,23 +1,20 @@
 <?php
-    require '../app/Autoloader.php';
-    App\Autoloader::register();
-
-    if(isset($_GET['p'])) {
-        $p = $_GET['p'];
+    define('ROOT', dirname(__DIR__));
+    require ROOT . '/app/App.php';
+    App::load();
+    
+    
+    if(isset($_GET['page'])) {
+        $page = $_GET['page'];
     } else {
-        $p = 'home';
+        $page = 'home';
     }
-
+    
+    
     ob_start();
-
-    if($p === 'home') {
-        require '../pages/home.php';
-    } else if($p == 'article') {
-        require '../pages/single.php';
-    } else if($p == 'categorie') {
-        require '../pages/categorie.php';
+    if($page == 'home') {
+        require ROOT . '/pages/articles/home.php';
     }
-
+    
     $content = ob_get_clean();
-
-    require '../pages/templates/default.php';
+    require ROOT . '/pages/templates/default.php';
